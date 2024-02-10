@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class DataValidator {
+
     public boolean isvalidate(String commandStr, Enum[] commandsData) {
         for (Enum command : commandsData) {
             if (command.name().equals(commandStr)) {

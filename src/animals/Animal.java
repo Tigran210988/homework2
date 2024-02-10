@@ -13,6 +13,7 @@ public abstract class Animal {
     private DataValidator dataValidator = new DataValidator();
 
 
+
     public void say() {
         System.out.println("Я говорю");
     }
@@ -49,41 +50,51 @@ public abstract class Animal {
 //    }
     public void setAge(Scanner scanner) {
         int data = -1;
-        while(true) {
-            System.out.println("Введите возраст животного");
-            String ageStr = scanner.next();
-            if(dataValidator.isDataByRegExp(ageStr, Pattern.compile("^\\d+$"))) {
-                data = Integer.parseInt(ageStr);
-                if(data > 50 || data <=0) {
-                    System.out.println("Возраст животного должен быть в пределах от 0 до 50 лет");
-                    continue;
-                }
+        boolean isValidAge = false;
+        while (!isValidAge) {
+            try {
+                System.out.println("Введите возраст животного");
+                String ageStr = scanner.next();
+                if (dataValidator.isDataByRegExp(ageStr, Pattern.compile("^\\d+$"))) {
+                    data = Integer.parseInt(ageStr);
+                    if (data > 50 || data <= 0) {
+                        System.out.println("Возраст животного должен быть в пределах от 0 до 50 лет");
+                        continue;
+                    }
+
                 break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Введено некорректное число. Возраст животного должен быть в пределах от 0 до 50 лет");
             }
         }
-
         this.age = data;
     }
 
     public void setWeight(Scanner scanner) {
         int data = -1;
-        while(true) {
-            System.out.println("Введите вес животного");
-            String ageStr = scanner.next();
-            if(dataValidator.isDataByRegExp(ageStr, Pattern.compile("^\\d+$"))) {
-                data = Integer.parseInt(ageStr);
-                if(data > 50 || data <=0) {
-                    System.out.println("Вес животного должен быть в пределах от 0 до 50 кг");
-                    continue;
+        boolean isValidWeight = false;
+        while (!isValidWeight) {
+            try {
+                System.out.println("Введите вес животного");
+                String weightStr = scanner.next();
+                if (dataValidator.isDataByRegExp(weightStr, Pattern.compile("^\\d+$"))) {
+                    data = Integer.parseInt(weightStr);
+                    if (data > 50 || data <= 0) {
+                        System.out.println("Вес животного должен быть в пределах от 0 до 50 кг");
+                        continue;
+                    }
+                    break;
                 }
-                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Введено некорректное число. Вес животного должен быть в пределах от 0 до 50 кг");
             }
         }
-
         this.weight = data;
     }
 
     public void setColor(String color) {
+
         this.color = color;
     }
 
